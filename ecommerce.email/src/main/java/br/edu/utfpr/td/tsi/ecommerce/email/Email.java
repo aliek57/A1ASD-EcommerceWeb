@@ -5,6 +5,8 @@ public class Email {
 	private String assunto;
 	private String mensagem;
 	
+	public Email() {}
+	
 	public Email(String destinatario, String assunto, String mensagem) {
 		super();
 		this.destinatario = destinatario;

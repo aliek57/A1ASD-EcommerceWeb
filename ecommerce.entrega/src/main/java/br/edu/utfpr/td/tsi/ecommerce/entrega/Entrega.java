@@ -5,6 +5,8 @@ public class Entrega {
 	private String dataPrevista;
 	private String status;
 	
+	public Entrega() {}
+	
 	public Entrega(String codigo, String dataPrevista, String status) {
 		super();
 		this.codigo = codigo;

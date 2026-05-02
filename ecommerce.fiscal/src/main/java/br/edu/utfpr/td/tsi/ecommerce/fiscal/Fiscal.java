@@ -8,6 +8,8 @@ public class Fiscal {
 	private String dataEmissao;
 	private BigDecimal valorTotal;
 	
+	public Fiscal() {}
+	
 	public Fiscal(String nota, String chaveAcesso, String dataEmissao, BigDecimal valorTotal) {
 		super();
 		this.nota = nota;

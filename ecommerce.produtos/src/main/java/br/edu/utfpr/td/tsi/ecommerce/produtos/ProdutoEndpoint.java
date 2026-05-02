@@ -24,8 +24,7 @@ public class ProdutoEndpoint {
 	private List<Produto> criarProdutos() {
 		List<Produto> produtos = new ArrayList<Produto>();
 
-		Produto notebook = new Produto().id("p001").nome("Notebook Dell").urlImagem("https://cdn.awsli.com.br/600x450/2179/2179851/produto/346101469/notebook-dell-vostro-3401--8--6bdzezwqu6.png").preco(new BigDecimal("3500.00"))
-				.quantidadeEmEstoque(15);
+		Produto notebook = new Produto("p001", "Notebook Dell", "https://cdn.awsli.com.br/600x450/2179/2179851/produto/346101469/notebook-dell-vostro-3401--8--6bdzezwqu6.png", new BigDecimal("3500.00"), 15);
 		produtos.add(notebook);
 
 		return produtos;

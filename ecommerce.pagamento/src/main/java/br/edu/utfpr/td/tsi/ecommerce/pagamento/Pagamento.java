@@ -8,6 +8,8 @@ public class Pagamento {
 	private BigDecimal valor;
 	private String status;
 	
+	public Pagamento() {}
+	
 	public Pagamento(String numeroCartao, String nomeTitular, BigDecimal valor, String status) {
 		super();
 		this.numeroCartao = numeroCartao;

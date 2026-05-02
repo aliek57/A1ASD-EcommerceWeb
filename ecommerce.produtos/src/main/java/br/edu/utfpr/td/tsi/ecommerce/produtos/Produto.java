@@ -9,32 +9,23 @@ public class Produto {
 	private String urlImagem;
 	private BigDecimal preco;
 	private int quantidadeEmEstoque;
+	
+	public Produto() {}
+
+	public Produto(String id, String nome, String urlImagem, BigDecimal preco, int quantidadeEmEstoque) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.urlImagem = urlImagem;
+		this.preco = preco;
+		this.quantidadeEmEstoque = quantidadeEmEstoque;
+	}
 
 	public Produto id(String id) {
 		this.id = id;
 		return this;
 	}
-
-	public Produto nome(String nome) {
-		this.nome = nome;
-		return this;
-	}
-
-	public Produto urlImagem(String urlImagem) {
-		this.urlImagem = urlImagem;
-		return this;
-	}
-
-	public Produto preco(BigDecimal preco) {
-		this.preco = preco;
-		return this;
-	}
-
-	public Produto quantidadeEmEstoque(int quantidadeEmEstoque) {
-		this.quantidadeEmEstoque = quantidadeEmEstoque;
-		return this;
-	}
-
+	
 	public String getId() {
 		return id;
 	}

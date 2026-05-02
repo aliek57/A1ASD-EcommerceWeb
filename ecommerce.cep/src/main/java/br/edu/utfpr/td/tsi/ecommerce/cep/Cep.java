@@ -7,6 +7,8 @@ public class Cep {
 	private String cidade;
 	private String estado;
 	
+	public Cep() {}
+	
 	public Cep(String cep, String logradouro, String bairro, String cidade, String estado) {
 		super();
 		this.cep = cep;
