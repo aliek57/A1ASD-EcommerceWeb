@@ -28,4 +28,24 @@ public class ConexaoCliente {
 			return null;
 		}
 	}
+	
+	public String buscarCep(String cep) {
+	    try {
+	        URL url = new URL("http://localhost:8082/ecommerce.cep/cep/" + cep);
+	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+	        con.setRequestMethod("GET");
+
+	        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	        String inputLine;
+	        StringBuilder response = new StringBuilder();
+	        while ((inputLine = in.readLine()) != null) {
+	            response.append(inputLine);
+	        }
+	        in.close();
+	        return response.toString();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 }

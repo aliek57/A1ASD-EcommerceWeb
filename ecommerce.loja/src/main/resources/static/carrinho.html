@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <title>E-commerce • Carrinho</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./css/loja.css">
+</head>
+<body>
+  <header>
+    <div class="wrap bar">
+      <h1>Meu Carrinho</h1>
+      <div class="spacer"></div>
+      <a href="loja.html" class="pill">Voltar</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card content">
+      <h2>Itens no seu carrinho</h2>
+      <div id="listaItens"></div>
+      <hr>
+      <div class="row">
+        <h3>Total: <span id="valorTotal">R$ 0,00</span></h3>
+      </div>
+    </section>
+
+    <section class="card content" style="margin-top: 20px;">
+	  <h2>Dados de Entrega</h2>
+	  <div class="row">
+	    <input type="text" id="cep" placeholder="CEP" style="flex: 1; padding: 8px;">
+	    <button class="btn" id="btnBuscarCep">Buscar CEP</button>
+	  </div>
+	  <input type="text" id="logradouro" placeholder="Rua/Logradouro" readonly style="margin-top: 10px; padding: 8px; background: #eee;">
+	  <input type="text" id="bairro" placeholder="Bairro" readonly style="margin-top: 10px; padding: 8px; background: #eee;">
+	  <input type="text" id="cidade" placeholder="Cidade" readonly style="margin-top: 10px; padding: 8px; background: #eee;">
+	  
+	  <h2 style="margin-top: 20px;">Pagamento</h2>
+	  <input type="text" id="nome" placeholder="Nome Titular" style="margin-bottom: 10px; padding: 8px;">
+	  <input type="text" id="cartao" placeholder="Número do Cartão" style="margin-bottom: 10px; padding: 8px;">
+	  <button class="btn" id="btnComprar">Finalizar Compra</button>
+	</section>
+  </main>
+
+  <script src="./js/carrinho.js"></script>
+</body>
+</html>
