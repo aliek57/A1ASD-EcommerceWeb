@@ -75,4 +75,31 @@ public class ConexaoCliente {
 	        return null;
 	    }
 	}
+
+	public String enviarEmail(String emailJson) {
+	    try {
+	        URL url = new URL("http://localhost:8084/ecommerce.email/email");
+	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+	        con.setRequestMethod("POST");
+	        con.setRequestProperty("Content-Type", "application/json");
+	        con.setDoOutput(true);
+
+	        try (OutputStream os = con.getOutputStream()) {
+	            byte[] input = emailJson.getBytes("utf-8");
+	            os.write(input, 0, input.length);
+	        }
+
+	        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+	        StringBuilder response = new StringBuilder();
+	        String line;
+	        while ((line = in.readLine()) != null) {
+	            response.append(line.trim());
+	        }
+	        in.close();
+	        return response.toString();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 }
