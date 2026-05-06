@@ -28,7 +28,6 @@ public class VendaEndpoint {
 	@PostMapping("/finalizar")
 	public Venda finalizarVenda(@RequestBody Venda venda) {
 		logger.log(Level.INFO, ">>>>> ORQUESTRAÇÃO DE VENDA <<<<<");
-		logger.log(Level.INFO, "Cliente: " + venda.getNomeCliente() + " | Total: " + venda.getValorTotal());
 		
 		String emailConfirmacao = String.format(
 	        "{\"destinatario\":\"%s\", \"assunto\":\"Pedido Recebido\", \"mensagem\":\"Olá %s, seu pedido foi recebido e está aguardando pagamento.\"}",
@@ -38,7 +37,7 @@ public class VendaEndpoint {
 	    logger.log(Level.INFO, "Email enviado: " + emailConfirmacao);
 	    
 	    String pagamentoJSON = String.format(
-	        "{\"numeroCartao\":\"%s\", \"nomeTitular\":\"%s\", \"valor\":%s}",
+	        "{\"numeroCartao\":\"%s\", \"nomeTitular\":\"%s\", \"valor\":%s",
 	        venda.getNumeroCartao(), venda.getNomeCliente(), venda.getValorTotal()
 	    );
 	    String resultadoPagamento = cliente.processarPagamento(pagamentoJSON);
@@ -48,14 +47,37 @@ public class VendaEndpoint {
 	    venda.setStatusPagamento(status);
 	    
 	    String emailResultado = String.format(
-            "{\"destinatario\":\"%s\", \"assunto\":\"Status do seu Pagamento\", \"mensagem\":\"Olá %s, seu pagamento foi: %s.\"}",
-            venda.getEmailCliente(), venda.getNomeCliente(), status
+            "{\"destinatario\":\"%s\", \"assunto\":\"Status do Pagamento\", \"mensagem\":\"Olá %s, seu pedido de valor R$%s no cartão %s foi %s.\"}",
+            venda.getEmailCliente(), venda.getNomeCliente(), venda.getValorTotal(), venda.getNumeroCartao(), status
         );
         cliente.enviarEmail(emailResultado);
-        if (status.equals("Reprovado")) {
-            logger.log(Level.SEVERE, "Email envio resultado: " + emailResultado);
-        } else {
+        
+        if (status.equals("Aprovado")) {
+        	String nf = java.util.UUID.randomUUID().toString();
+        	String dataEmitida = java.time.LocalDate.now().toString();
+        	
+        	String fiscalJSON = String.format(
+    	        "{\"nota\":\"NF-%s\", \"chaveAcesso\":\"110903\", \"dataEmissao\":\"%s\", \"valorTotal\":%s}",
+    	        nf, dataEmitida, venda.getValorTotal()
+    	    );
+        	
         	logger.log(Level.INFO, "Email envio resultado: " + emailResultado);
+        	
+        	String resultadoFiscal = cliente.emitirNF(fiscalJSON);
+            logger.log(Level.INFO, "Nota Fiscal emitida: " + resultadoFiscal);
+            
+            venda.setNumeroNotaFiscal("NF-" + nf);
+            
+            // baixar estoque
+            
+            String emailFiscal = String.format(
+                "{\"destinatario\":\"%s\", \"assunto\":\"Envio Nota Fiscal\", \"mensagem\":\"Olá %s, a nota fiscal da sua compra é: %s\"}",
+                venda.getEmailCliente(), venda.getNomeCliente(), venda.getNumeroNotaFiscal()
+            );
+            cliente.enviarEmail(emailFiscal);
+            logger.log(Level.INFO, "Email envio NF: " + emailFiscal);
+        } else {
+        	logger.log(Level.SEVERE, "Email envio resultado: " + emailResultado);
         }
 	    
 	    return venda;
