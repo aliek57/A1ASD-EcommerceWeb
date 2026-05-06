@@ -3,6 +3,8 @@ package br.edu.utfpr.td.tsi.ecommerce.loja;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,5 +20,19 @@ public class VendaEndpoint {
 	@GetMapping("/cep/{cep}")
 	public String consultarCep(@PathVariable String cep) {
 	    return cliente.buscarCep(cep);
+	}
+	
+	@PostMapping("/finalizar")
+	public Venda finalizarVenda(@RequestBody Venda venda) {
+	    String pagamentoJSON = String.format(
+	        "{\"numeroCartao\":\"%s\", \"nomeTitular\":\"%s\", \"valor\":%s}",
+	        venda.getNumeroCartao(), venda.getNomeCliente(), venda.getValorTotal()
+	    );
+	    
+	    cliente.processarPagamento(pagamentoJSON);
+	    
+	    venda.setStatusPagamento("Aprovado");
+	    
+	    return venda;
 	}
 }
