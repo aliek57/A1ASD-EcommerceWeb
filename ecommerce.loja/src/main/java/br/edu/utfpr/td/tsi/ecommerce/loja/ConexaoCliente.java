@@ -139,4 +139,30 @@ public class ConexaoCliente {
 	        e.printStackTrace();
 	    }
 	}
+	
+	public String agendarEntrega(String entregaJson) {
+	    try {
+	        URL url = new URL("http://localhost:8086/ecommerce.entrega/entrega");
+	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+	        con.setRequestMethod("POST");
+	        con.setRequestProperty("Content-Type", "application/json");
+	        con.setDoOutput(true);
+
+	        try (OutputStream os = con.getOutputStream()) {
+	            byte[] input = entregaJson.getBytes("utf-8");
+	            os.write(input, 0, input.length);
+	        }
+
+	        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+	        StringBuilder response = new StringBuilder();
+	        String line;
+	        while ((line = in.readLine()) != null) {
+	            response.append(line.trim());
+	        }
+	        return response.toString();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 }

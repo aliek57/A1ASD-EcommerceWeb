@@ -80,6 +80,26 @@ public class VendaEndpoint {
             );
             cliente.enviarEmail(emailFiscal);
             logger.log(Level.INFO, "Email envio NF: " + emailFiscal);
+            
+            String codigoRastreio = "BR" + java.util.UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+            String dataPrevisao = java.time.LocalDate.now().plusDays(7).toString();
+            
+            String entregaJSON = String.format(
+        	    "{\"codigo\":\"%s\", \"dataPrevista\":\"%s\", \"status\":\"Postado\"}",
+        	    codigoRastreio, dataPrevisao
+        	);
+            
+            String resultadoEntrega = cliente.agendarEntrega(entregaJSON);
+            logger.log(Level.INFO, "Entrega agendada: " + resultadoEntrega);
+            
+            venda.setProtocoloRastreio(codigoRastreio);
+            
+            String emailEntrega = String.format(
+        	    "{\"destinatario\":\"%s\", \"assunto\":\"Pedido Enviado!\", \"mensagem\":\"Olá %s, o seu pedido foi postado para envio. Código de rastreio: %s. Previsão de entrega: %s\"}",
+        	    venda.getEmailCliente(), venda.getNomeCliente(), codigoRastreio, dataPrevisao
+        	);
+        	cliente.enviarEmail(emailEntrega);
+        	logger.log(Level.INFO, "Email de entrega prevista: " + emailEntrega);
         } else {
         	logger.log(Level.SEVERE, "Email envio resultado: " + emailResultado);
         }
