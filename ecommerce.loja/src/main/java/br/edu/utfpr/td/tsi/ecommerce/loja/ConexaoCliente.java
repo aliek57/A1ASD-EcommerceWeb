@@ -128,4 +128,15 @@ public class ConexaoCliente {
 	        return null;
 	    }
 	}
+	
+	public void baixarEstoque(String id, int qtd) {
+	    try {
+	        URL url = new URL("http://localhost:8081/ecommerce.produtos/baixar-estoque/" + id + "/" + qtd);
+	        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+	        con.setRequestMethod("POST");
+	        con.getResponseCode();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }

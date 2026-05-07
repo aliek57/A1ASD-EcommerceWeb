@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.utfpr.td.tsi.ecommerce.produtos.Produto;
+
 @RestController
 @CrossOrigin
 public class VendaEndpoint {
@@ -37,7 +39,7 @@ public class VendaEndpoint {
 	    logger.log(Level.INFO, "Email enviado: " + emailConfirmacao);
 	    
 	    String pagamentoJSON = String.format(
-	        "{\"numeroCartao\":\"%s\", \"nomeTitular\":\"%s\", \"valor\":%s",
+	        "{\"numeroCartao\":\"%s\", \"nomeTitular\":\"%s\", \"valor\":%s}",
 	        venda.getNumeroCartao(), venda.getNomeCliente(), venda.getValorTotal()
 	    );
 	    String resultadoPagamento = cliente.processarPagamento(pagamentoJSON);
@@ -68,7 +70,9 @@ public class VendaEndpoint {
             
             venda.setNumeroNotaFiscal("NF-" + nf);
             
-            // baixar estoque
+            for (Produto item : venda.getItens()) {
+            	cliente.baixarEstoque(item.getId(), 1);
+            }
             
             String emailFiscal = String.format(
                 "{\"destinatario\":\"%s\", \"assunto\":\"Envio Nota Fiscal\", \"mensagem\":\"Olá %s, a nota fiscal da sua compra é: %s\"}",
