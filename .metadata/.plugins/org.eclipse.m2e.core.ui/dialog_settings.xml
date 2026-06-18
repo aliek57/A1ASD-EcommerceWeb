@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\Particular\Desktop\ASDA1 - Ecommerce Produtos\ecommerce.produtos"/>
 			<item value="C:\Users\Particular\Downloads\ecommerce.produtos (projeto de referência)-20260430\ecommerce.produtos"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -16,5 +17,74 @@
 	<section name="org.eclipse.m2e.core.pom.overview">
 	</section>
 	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="C:\Users\Particular\Desktop\ASDA1 - Ecommerce Produtos\ecommerce.produtos\pom.xml"/>
+			<item value="C:\Users\Particular\Desktop\ASDA1 - Ecommerce Produtos\ecommerce.pagamento\src\main\java\br\edu\utfpr\td\tsi\ecommerce\pagamento\Main.java"/>
+			<item value="C:\Users\Particular\Desktop\ASDA1 - Ecommerce Produtos\ecommerce.cep"/>
+			<item value="C:\Users\Particular\Desktop\ASDA1 - Ecommerce Produtos\"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item key="catalog" value="All Catalogs"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+		</list>
+		<list key="groupId">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+			<item value="br.edu.utfpr.td.tsi"/>
+			<item value="br.edu.utfpr.td"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="ecommerce.loja"/>
+			<item value="ecommerce.entrega"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
 	</section>
 </section>
